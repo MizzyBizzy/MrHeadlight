@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ClearBeam — Headlight Restoration & Cleaning</title>
+  <meta name="description" content="Professional headlight restoration. Brighter lights, safer nights. Mobile service. Same-day appointments." />
+  <meta property="og:title" content="ClearBeam — Headlight Restoration & Cleaning" />
+  <meta property="og:description" content="Brighter lights, safer nights. Mobile headlight restoration and cleaning." />
+  <meta name="theme-color" content="#0f172a" />
+
+  <style>
+    /* ============ THEME (Quick customization) ============ */
+    :root{
+      --brand: #10b981;         /* Primary accent color */
+      --brand-2: #14b8a6;       /* Gradient 2 */
+      --bg: #0b1020;            /* App background */
+      --panel: #111832;         /* Panels */
+      --text: #eef2ff;          /* Main text */
+      --muted: #9fb0cf;         /* Secondary text */
+      --card: #0f152b;          /* Cards */
+      --border: #223158;        /* Borders */
+      --ring: #10b98155;        /* Focus ring */
+      --radius: 14px;           /* Corner radius */
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
+    }
+    /* Optional light theme: add class="light" to <html> if you prefer */
+    :root.light{
+      --brand: #0ea5e9;
+      --brand-2: #60a5fa;
+      --bg: #ffffff;
+      --panel: #f3f6fb;
+      --text: #0b1020;
+      --muted: #4c5b75;
+      --card: #ffffff;
+      --border: #d8e2f0;
+      --ring: #0ea5e955;
+    }
+
+    /* ============ Base ============ */
+    *{ box-sizing: border-box }
+    html, body{ height: 100% }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 80% -10%, #1a2452 0%, transparent 60%),
+        radial-gradient(1000px 500px at -10% 0%, #112046 0%, transparent 60%),
+        var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    a{ color: inherit; text-decoration: none }
+    img{ max-width: 100%; height: auto; display: block }
+    .container{ width:100%; max-width: 1080px; margin:0 auto; padding: 0 1rem }
+
+    /* ============ Header / Nav ============ */
+    header{
+      position: sticky; top:0; z-index:50;
+      background: color-mix(in oklab, var(--bg) 86%, transparent);
+      backdrop-filter: blur(8px) saturate(1.15);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.8rem 0 }
+    .brand{
+      display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.2px
+    }
+    .logo{
+      width:30px; height:30px; border-radius:9px;
+      background: conic-gradient(from 200deg, var(--brand), var(--brand-2));
+      box-shadow: 0 10px 24px -12px var(--ring), 0 0 0 1px color-mix(in oklab, var(--brand) 40%, transparent);
+    }
+    nav ul{ display:flex; gap:.8rem; list-style:none; padding:0; margin:0 }
+    nav a{ padding:.5rem .7rem; border-radius:.6rem; color: var(--muted) }
+    nav a:hover{ color:var(--text); background: color-mix(in oklab, var(--panel) 55%, transparent) }
+    .nav-actions{ display:flex; align-items:center; gap:.6rem }
+    .btn{
+      display:inline-flex; align-items:center; gap:.5rem; cursor:pointer;
+      padding:.6rem .9rem; border-radius: .7rem; border:1px solid var(--border);
+      background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 70%, transparent), color-mix(in oklab, #000 10%, transparent));
+      color: var(--text);
+    }
+    .btn.primary{
+      border: none; color: #fff;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: 0 10px 24px -14px var(--ring);
+    }
+    .btn:focus{ outline:2px solid var(--ring); outline-offset:2px }
+    .hamburger{ display:none }
+    @media(max-width:800px){
+      nav ul{ display:none }
+      .hamburger{ display:inline-flex }
+      .mobile-menu{
+        display:none; position: fixed; inset: 56px 0 0 0; z-index: 40;
+        background: var(--bg); border-top:1px solid var(--border); padding:1rem;
+      }
+      .mobile-menu.open{ display:block }
+      .mobile-menu a{ display:block; padding:.9rem .6rem; border-radius:.6rem; color: var(--muted) }
+      .mobile-menu a:hover{ color:var(--text); background: color-mix(in oklab, var(--panel) 55%, transparent) }
+    }
+
+    /* ============ Hero ============ */
+    .hero{
+      padding: 72px 0 36px;
+      background:
+        radial-gradient(700px 300px at 20% 0%, color-mix(in oklab, var(--brand) 20%, transparent), transparent 60%),
+        radial-gradient(400px 220px at 100% 0%, color-mix(in oklab, var(--brand-2) 18%, transparent), transparent 60%);
+    }
+    .hero-grid{
+      display:grid; gap:1.2rem; align-items:center;
+      grid-template-columns: 1fr;
+    }
+    @media(min-width:900px){ .hero-grid{ grid-template-columns: 1.1fr .9fr } }
+    h1{ margin:0 0 .6rem; font-size: clamp(2rem, 3.2vw + 1rem, 3.3rem); line-height:1.1; letter-spacing:-.02em }
+    .lead{ color: var(--muted); font-size: clamp(1rem, .9vw + .9rem, 1.25rem) }
+    .cta{ display:flex; gap:.7rem; flex-wrap:wrap; margin-top:1rem }
+    .hero-card{
+      border:1px solid var(--border); border-radius: var(--radius); padding:1rem;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 70%, transparent), color-mix(in oklab, #000 10%, transparent));
+      box-shadow: 0 18px 60px -42px #0009, inset 0 1px 0 color-mix(in oklab, #fff 6%, transparent);
+    }
+    .kpis{ display:grid; grid-template-columns: 1fr 1fr; gap:.7rem }
+    .kpi{ background: var(--card); border:1px solid var(--border); border-radius: 12px; padding:.7rem; color:var(--muted) }
+    .kpi strong{ color: var(--text) }
+
+    /* ============ Sections / Cards / Grids ============ */
+    section{ padding: 56px 0 }
+    .section-title{ margin:0 0 .5rem; font-size: clamp(1.4rem, 1.3vw + 1.1rem, 2rem) }
+    .section-lead{ color: var(--muted); margin: 0 0 1rem }
+    .grid{ display:grid; gap:1rem }
+    .cols-2{ grid-template-columns: 1fr; }
+    .cols-3{ grid-template-columns: 1fr; }
+    @media(min-width:700px){ .cols-2{ grid-template-columns: repeat(2,1fr) } }
+    @media(min-width:900px){ .cols-3{ grid-template-columns: repeat(3,1fr) } }
+    .card{
+      background: var(--card); border:1px solid var(--border); border-radius: var(--radius); padding:1rem;
+    }
+    .row{ display:flex; align-items:center; gap:.6rem; flex-wrap: wrap }
+
+    /* ============ Services & Pricing ============ */
+    .icon{
+      width:42px; height:42px; display:grid; place-items:center; border-radius:10px;
+      border:1px solid var(--border);
+      background: linear-gradient(135deg, color-mix(in oklab, var(--brand) 12%, transparent), color-mix(in oklab, var(--brand-2) 12%, transparent));
+      font-weight: 800;
+    }
+    .price{
+      font-size: 1.6rem; font-weight:800; letter-spacing:.2px;
+    }
+    .muted{ color: var(--muted) }
+    .pill{ font-size:.8rem; padding:.2rem .5rem; border-radius:.5rem; border:1px solid var(--border); background: color-mix(in oklab, var(--panel) 60%, transparent) }
+
+    /* ============ Gallery ============ */
+    .gallery{ display:grid; gap:1rem; grid-template-columns: 1fr; }
+    @media(min-width:800px){ .gallery{ grid-template-columns: repeat(3, 1fr) } }
+    .shot{ position:relative; aspect-ratio:4/3; overflow:hidden; border-radius:12px; border:1px solid var(--border); background: #0b0f1e }
+    .shot canvas{ position:absolute; inset:0; width:100%; height:100% }
+    .label{ position:absolute; left:.5rem; bottom:.5rem; background:#0007; color:#fff; font-size:.8rem; padding:.25rem .5rem; border-radius:.4rem }
+
+    /* ============ FAQ ============ */
+    details{
+      border:1px solid var(--border); border-radius:12px; padding:.8rem 1rem; background: var(--card)
+    }
+    summary{ cursor:pointer; font-weight:600 }
+    details + details{ margin-top:.6rem }
+
+    /* ============ Footer ============ */
+    footer{ padding: 26px 0; border-top:1px solid var(--border); color: var(--muted) }
+    .foot{ display:flex; justify-content:space-between; align-items:center; gap:.8rem; flex-wrap: wrap }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>ClearBeam</span>
+      </div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#gallery">Before & After</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a href="#contact" class="btn primary">Book now</a>
+        <button id="menuBtn" class="btn hamburger" aria-label="Menu">☰</button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile Menu">
+      <a href="#services" onclick="closeMenu()">Services</a>
+      <a href="#pricing" onclick="closeMenu()">Pricing</a>
+      <a href="#gallery" onclick="closeMenu()">Before & After</a>
+      <a href="#faq" onclick="closeMenu()">FAQ</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Headlight Restoration that shines like new.</h1>
+          <p class="lead">We remove fog, yellowing, and scratches to restore clarity and brightness. Mobile service for busy drivers.</p>
+          <div class="cta">
+            <a href="#pricing" class="btn primary">See pricing</a>
+            <a href="#contact" class="btn">Get a quote</a>
+            <span class="pill">Same-day appointments</span>
+          </div>
+          <div class="hero-card" style="margin-top:1rem">
+            <div class="kpis">
+              <div class="kpi">⏱️ <strong>45–60 min</strong><br><span class="muted">Typical service time</span></div>
+              <div class="kpi">💡 <strong>Up to 3×</strong><br><span class="muted">More light output</span></div>
+              <div class="kpi">🛡️ <strong>6–12 mo</strong><br><span class="muted">Protection coating</span></div>
+              <div class="kpi">📍 <strong>We come to you</strong><br><span class="muted">Home or workplace</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Preview image">
+          <canvas id="heroCanvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">Our services</h2>
+        <p class="section-lead">Transparent packages for every need. All include UV protection sealant.</p>
+        <div class="grid cols-3">
+          <div class="card">
+            <div class="row"><div class="icon">✨</div><strong>Standard Clean</strong></div>
+            <p class="muted">Surface-level haze removal, polish, and UV seal. Ideal for lightly fogged lenses.</p>
+            <ul class="muted" style="margin:0; padding-left:1rem">
+              <li>Wash & tape-off</li>
+              <li>Polish compounds</li>
+              <li>UV sealant</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="row"><div class="icon">🔧</div><strong>Deep Restoration</strong></div>
+            <p class="muted">Full wet-sand, multi-stage polish, and ceramic UV coat for heavy yellowing.</p>
+            <ul class="muted" style="margin:0; padding-left:1rem">
+              <li>Wet sanding (multi-grit)</li>
+              <li>Two-stage polish</li>
+              <li>Ceramic UV protection</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="row"><div class="icon">🧼</div><strong>Add‑ons</strong></div>
+            <p class="muted">Optional extras to keep your car looking sharp.</p>
+            <ul class="muted" style="margin:0; padding-left:1rem">
+              <li>Fog light lenses</li>
+              <li>Tail light polish</li>
+              <li>Trim refresh</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+      <div class="container">
+        <h2 class="section-title">Simple pricing</h2>
+        <p class="section-lead">Per vehicle. No surprises. Multi-car discounts available.</p>
+        <div class="grid cols-3">
+          <div class="card">
+            <div class="row" style="justify-content:space-between">
+              <strong>Standard Clean</strong>
+              <span class="price">$59</span>
+            </div>
+            <p class="muted">Light haze and yellowing.</p>
+            <a href="#contact" class="btn primary" style="width:100%; justify-content:center">Book Standard</a>
+          </div>
+          <div class="card" style="outline:2px solid color-mix(in oklab, var(--brand) 38%, transparent)">
+            <div class="row" style="justify-content:space-between">
+              <strong>Deep Restoration</strong>
+              <span class="price">$89</span>
+            </div>
+            <p class="muted">Heavy oxidation and scratches.</p>
+            <a href="#contact" class="btn primary" style="width:100%; justify-content:center">Book Deep</a>
+          </div>
+          <div class="card">
+            <div class="row" style="justify-content:space-between">
+              <strong>Add‑ons</strong>
+              <span class="price">from $20</span>
+            </div>
+            <p class="muted">Fog lights, tail lights, trim refresh.</p>
+            <a href="#contact" class="btn" style="width:100%; justify-content:center">Ask about add‑ons</a>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:.6rem">Note: Prices may vary slightly by vehicle and condition.</p>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+      <div class="container">
+        <h2 class="section-title">Before & after</h2>
+        <p class="section-lead">A few sample results. Replace with your own photos when ready.</p>
+        <div class="gallery">
+          <div class="shot"><canvas></canvas><span class="label">Before</span></div>
+          <div class="shot"><canvas></canvas><span class="label">After</span></div>
+          <div class="shot"><canvas></canvas><span class="label">After 6 months</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+      <div class="container">
+        <h2 class="section-title">What customers say</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            “Couldn’t believe the difference. Night driving is so much clearer now.” — <strong>Maya R.</strong>
+          </div>
+          <div class="card">
+            “They came to my office and finished during lunch. Looks brand new.” — <strong>Kevin T.</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <h2 class="section-title">FAQ</h2>
+        <div class="grid">
+          <details>
+            <summary>How long does it last?</summary>
+            <p class="muted">With proper care and our UV sealant, results typically last 6–12 months. We offer discounted touch‑ups.</p>
+          </details>
+          <details>
+            <summary>Do you come to us?</summary>
+            <p class="muted">Yes! We’re a mobile service. We just need a safe parking spot and access to a standard outlet if possible.</p>
+          </details>
+          <details>
+            <summary>Is it safe for my car?</summary>
+            <p class="muted">Yes. We mask off paint and use professional compounds and techniques to protect your vehicle.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Get a free quote</h2>
+        <p class="section-lead">Tell us your car model and location. We’ll reply within 1 business day.</p>
+        <div class="grid cols-2">
+          <form id="contactForm" class="card" action="https://formspree.io/f/your-form-id" method="POST" novalidate>
+            <div class="row" style="gap:.8rem">
+              <div style="flex:1 1 220px">
+                <label for="name" class="muted">Name</label>
+                <input id="name" name="name" placeholder="Jane Doe" required />
+              </div>
+              <div style="flex:1 1 220px">
+                <label for="email" class="muted">Email</label>
+                <input id="email" name="email" type="email" placeholder="jane@example.com" required />
+              </div>
+            </div>
+            <div class="row" style="gap:.8rem">
+              <div style="flex:1 1 220px">
+                <label for="phone" class="muted">Phone</label>
+                <input id="phone" name="phone" placeholder="(555) 123-4567" />
+              </div>
+              <div style="flex:1 1 220px">
+                <label for="city" class="muted">City</label>
+                <input id="city" name="city" placeholder="Your city" />
+              </div>
+            </div>
+            <div>
+              <label for="message" class="muted">Car & details</label>
+              <textarea id="message" name="message" placeholder="e.g., 2015 Honda Civic, heavy yellowing on both headlights" required></textarea>
+            </div>
+            <div class="row" style="justify-content:space-between">
+              <label class="row muted" style="gap:.4rem"><input type="checkbox" name="consent" required /> I agree to be contacted about my request.</label>
+              <button class="btn primary" type="submit">Send request</button>
+            </div>
+            <p id="formStatus" class="muted" role="status" aria-live="polite" style="margin:.3rem 0 0"></p>
+          </form>
+
+          <div class="card">
+            <strong>Service area</strong>
+            <p class="muted">We currently serve Downtown and surrounding neighborhoods. Ask about travel fees for farther distances.</p>
+            <div class="row" style="gap:.5rem">
+              <span class="pill">Mobile service</span>
+              <span class="pill">Card & cash accepted</span>
+              <span class="pill">Weekend slots</span>
+            </div>
+            <div style="height:12px"></div>
+            <strong>Hours</strong>
+            <p class="muted">Mon–Sat: 9am–6pm</p>
+            <p class="muted">Sun: by appointment</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot">
+      <div class="row">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>ClearBeam</strong><br />
+          <span class="muted">Headlight Restoration</span>
+        </div>
+      </div>
+      <div class="row muted" style="gap:.6rem">
+        <a href="#contact">Book</a>
+        <span>•</span>
+        <a href="mailto:hello@clearbeam.example">hello@clearbeam.example</a>
+        <span>•</span>
+        <a href="tel:+15551234567">(555) 123‑4567</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function closeMenu(){ mobileMenu.classList.remove('open') }
+    if(menuBtn){
+      menuBtn.addEventListener('click', ()=> mobileMenu.classList.toggle('open'));
+    }
+
+    // Simple contact form UX (works with Formspree or similar)
+    const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('formStatus');
+    if(form){
+      form.addEventListener('submit', async (e)=>{
+        // If you replace action with your own backend, this still works.
+        e.preventDefault();
+        statusEl.textContent = 'Sending...';
+        const data = new FormData(form);
+        try{
+          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          if(res.ok){
+            statusEl.textContent = 'Thanks! We will get back to you soon.';
+            form.reset();
+          }else{
+            statusEl.textContent = 'There was an issue sending your request. Please try again or email us.';
+          }
+        }catch(err){
+          statusEl.textContent = 'Network error. Please check your connection and try again.';
+        }
+      });
+    }
+
+    // Canvas placeholders for hero and gallery (no external images needed)
+    function drawHeadlight(canvas, options={}){
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const w = canvas.clientWidth || 600;
+      const h = canvas.clientHeight || (canvas.parentElement?.clientHeight || 400);
+      canvas.width = w * dpr; canvas.height = h * dpr; canvas.style.width = w+'px'; canvas.style.height = h+'px';
+      const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
+
+      // Background gradient
+      const bg = ctx.createLinearGradient(0,0,w,h);
+      bg.addColorStop(0, '#0c132a'); bg.addColorStop(1, '#060a18');
+      ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
+
+      // Car body silhouette
+      ctx.fillStyle = '#0e1b3a';
+      ctx.beginPath();
+      ctx.moveTo(w*0.1, h*0.7);
+      ctx.quadraticCurveTo(w*0.35, h*0.35, w*0.65, h*0.35);
+      ctx.quadraticCurveTo(w*0.9, h*0.36, w*0.95, h*0.55);
+      ctx.quadraticCurveTo(w*0.8, h*0.7, w*0.1, h*0.7);
+      ctx.closePath(); ctx.fill();
+
+      // Headlight housing
+      ctx.fillStyle = '#1b2a55';
+      const x = w*0.62, y = h*0.48, lw = w*0.22, lh = h*0.14, r = 16;
+      roundRect(ctx, x, y, lw, lh, r); ctx.fill();
+
+      // Lens
+      const lensGrad = ctx.createLinearGradient(x,y,x+lw,y+lh);
+      lensGrad.addColorStop(0, '#98c7ff');
+      lensGrad.addColorStop(1, '#5aa2ff');
+      ctx.fillStyle = lensGrad;
+      roundRect(ctx, x+6, y+6, lw-12, lh-12, r*0.6); ctx.fill();
+
+      // Light beam (subtle)
+      const beam = ctx.createLinearGradient(x, y+lh*0.5, w, y+lh*0.5);
+      beam.addColorStop(0, 'rgba(255,255,210,0.75)');
+      beam.addColorStop(1, 'rgba(255,255,210,0)');
+      ctx.fillStyle = beam;
+      ctx.beginPath();
+      ctx.moveTo(x+lw*0.3, y+lh*0.25);
+      ctx.quadraticCurveTo(w*0.82, y, w, y+lh*0.25);
+      ctx.lineTo(w, y+lh*0.75);
+      ctx.quadraticCurveTo(w*0.8, y+lh, x+lw*0.3, y+lh*0.75);
+      ctx.closePath();
+      ctx.fill();
+
+      // Specular highlights
+      ctx.globalAlpha = 0.35;
+      ctx.fillStyle = '#fff';
+      roundRect(ctx, x+12, y+10, lw*0.25, lh*0.2, 10); ctx.fill();
+      ctx.globalAlpha = 1;
+
+      // Optional label
+      if(options.label){
+        ctx.fillStyle = '#9fb0cf';
+        ctx.font = '14px sans-serif';
+        ctx.fillText(options.label, 12, 22);
+      }
+    }
+    function roundRect(ctx, x, y, w, h, r){
+      const rr = Math.min(r, w/2, h/2);
+      ctx.beginPath();
+      ctx.moveTo(x+rr, y);
+      ctx.arcTo(x+w, y, x+w, y+h, rr);
+      ctx.arcTo(x+w, y+h, x, y+h, rr);
+      ctx.arcTo(x, y+h, x, y, rr);
+      ctx.arcTo(x, y, x+w, y, rr);
+      ctx.closePath();
+    }
+    function drawGallery(){
+      document.querySelectorAll('#gallery canvas').forEach((c, i)=>{
+        drawHeadlight(c, { label: ['Before','After','After 6 mo'][i] || '' });
+      });
+    }
+    function drawHero(){ const c = document.getElementById('heroCanvas'); if(c) drawHeadlight(c, { label: 'ClearBeam' }); }
+    const ro = new ResizeObserver(()=>{ drawHero(); drawGallery(); });
+    window.addEventListener('load', ()=>{ drawHero(); drawGallery(); ro.observe(document.body) });
+  </script>
+</body>
+</html>
